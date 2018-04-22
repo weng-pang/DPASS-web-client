@@ -6,7 +6,7 @@ Version 1.0
 
 This is the web edition of DPass Sector Computer Reporter.
 
-######This Version
+###### This Version
 Unlike the Reporter, it can report the presence of a sector computer only. 
 There will be no local log for its operation, the only way to check the presence is done by the DPass database. 
 
