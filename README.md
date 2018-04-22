@@ -1,6 +1,6 @@
 # DPASS-web-client
-### Version 1.1
-====================================
+### Version 1.2
+------------------------------------------------------------
 :copyright: Weng Long Pang 2018
 :copyright: Valentine Flower Limited 2018
 
