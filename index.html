@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<!--
+DPass Sector Computer Reporter Web Edition
+(C)Weng Long Pang 2018
+(C)Valentine Flower Limited 2018
+
+-->
+<head>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+// Javascript Querystring based on https://davidwalsh.name/query-string-javascript
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+function closeWindows(){
+self.close();
+};
+$(document).ready(function(){
+$("div#results").html(getUrlParameter('post'));
+setTimeout(closeWindows,5000);});
+</script>
+</head>
+<body>
+<div id="results"></div>
+</body>
+</html>
