@@ -20,11 +20,16 @@ function closeWindows(){
 self.close();
 };
 $(document).ready(function(){
-$("div#results").html(getUrlParameter('post'));
-setTimeout(closeWindows,5000);});
+$("div#url").html(getUrlParameter('post'));
+var localDate = new Date();
+// DateTime Format Output is based on https://stackoverflow.com/questions/20083807/javascript-date-to-sql-date-object
+// The toISOString method displays time in UTC, the mitigation is based on https://stackoverflow.com/a/37661393
+$("div#datetime").html(new Date(localDate.getTime() - (localDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' '));
+});
 </script>
 </head>
 <body>
-<div id="results"></div>
+<div id="url"></div>
+<div id="datetime"></div>
 </body>
 </html>
