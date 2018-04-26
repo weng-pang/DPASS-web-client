@@ -24,12 +24,19 @@ $("div#url").html(getUrlParameter('post'));
 var localDate = new Date();
 // DateTime Format Output is based on https://stackoverflow.com/questions/20083807/javascript-date-to-sql-date-object
 // The toISOString method displays time in UTC, the mitigation is based on https://stackoverflow.com/a/37661393
-$("div#datetime").html(new Date(localDate.getTime() - (localDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' '));
+var dateTime = new Date(localDate.getTime() - (localDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' ');
+$("div#datetime").html(dateTime);
+$.ajax({
+url:'https://kaugebra.com/dpass-rest/add',
+headers: {  'Access-Control-Allow-Origin': 'https://kaugebra.com/dpass-rest/add' }})
+.done(function(data){
+$("div#completed").html(data)});
 });
 </script>
 </head>
 <body>
 <div id="url"></div>
 <div id="datetime"></div>
+<div id="completed"></div>
 </body>
 </html>
