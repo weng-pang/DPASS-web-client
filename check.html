@@ -1,20 +1,17 @@
 <!doctype html>
 <html>
 <!--
-DPass Sector Computer Reporter Web Edition
+DPass Checker Web Edition
 (C)Weng Long Pang 2018
 (C)Valentine Flower Limited 2018
 
 Instruction:
-id must be presented. Example: ?id=990
-Please check id before running to prevent junk data entering DPass
-
 node_modules folder must accomply this file to run.
+
 -->
 <head>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script>
-var key = 'c34754cb-07cd-4e95-a01d-0f987dc1d1d4';
 // Javascript Querystring based on https://davidwalsh.name/query-string-javascript
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -24,50 +21,20 @@ function getUrlParameter(name) {
 };
 
 $(document).ready(function(){
-	// Look for id entry
-	var id = getUrlParameter('id')
-	$("div#url").html(id);
-	// Prepare the date-time for upload
+	$("div#url").html(getUrlParameter('post'));
 	var localDate = new Date();
 	// DateTime Format Output is based on https://stackoverflow.com/questions/20083807/javascript-date-to-sql-date-object
 	// The toISOString method displays time in UTC, the mitigation is based on https://stackoverflow.com/a/37661393
 	var dateTime = new Date(localDate.getTime() - (localDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' ');
 	$("div#datetime").html(dateTime);
-	// Perform SC Present entry to DPASS
-	// Prepare the content
-	var theContent = {
-	"id":parseInt(id),
-	"dateTime":dateTime,
-	"machineId":parseInt(id),
-	"entryId":0,
-	"ipAddress":"0.0.0.0",
-	"portNumber":0,
-	"update":dateTime};
-	var content = JSON.stringify(theContent);
-	if (id != null){
-		console.log(content);
-		var post = $.ajax({
-		method:'POST',
-		url:'https://kaugebra.com/dpass-rest/add',
-		data:{
-		'key':key,
-		'content':content},
-		});
-		// Show the transaction id afterwards
-		post.done(function(data){
-			console.log(data);
-			$("div#transaction").html(JSON.stringify(data));
-		});
-	}
-	
-	// Perform check query to DPASS
-	var check = $.ajax({
+	var request = $.ajax({
 		method:'POST',
 		url:'https://kaugebra.com/dpass-rest/check',
-		data:{'key':key},
+		data:{'key':'c34754cb-07cd-4e95-a01d-0f987dc1d1d4'},
 	});
-	check.done(function(data){
+	request.done(function(data){
 		console.log(data);
+		
 		$("div#completed").html(JSON.stringify(data));
 	});
 });
@@ -76,7 +43,6 @@ $(document).ready(function(){
 <body>
 <div id="url"></div>
 <div id="datetime"></div>
-<div id="transaction"></div>
 <div id="completed"></div>
 </body>
 </html>
