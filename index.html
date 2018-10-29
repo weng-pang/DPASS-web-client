@@ -6,13 +6,14 @@ DPass Sector Computer Reporter Web Edition
 (C)Valentine Flower Limited 2018
 
 Instruction:
-id must be presented. Example: ?id=990
+id must be presented to updload data. Example: ?id=990
 Please check id before running to prevent junk data entering DPass
 
 node_modules folder must accomply this file to run.
 -->
 <head>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+<title>DPass Web Client</title>
 <script>
 var key = 'c34754cb-07cd-4e95-a01d-0f987dc1d1d4';
 // Javascript Querystring based on https://davidwalsh.name/query-string-javascript
@@ -33,7 +34,7 @@ $(document).ready(function(){
 	// The toISOString method displays time in UTC, the mitigation is based on https://stackoverflow.com/a/37661393
 	var dateTime = new Date(localDate.getTime() - (localDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' ');
 	$("div#datetime").html(dateTime);
-	// Perform SC Present entry to DPASS
+	// Perform a Sector Computer Present entry to DPASS
 	// Prepare the content
 	var theContent = {
 	"id":parseInt(id),
@@ -48,7 +49,7 @@ $(document).ready(function(){
 		console.log(content);
 		var post = $.ajax({
 		method:'POST',
-		url:'https://kaugebra.com/dpass-rest/add',
+		url:'http://vflits.com/DPASS-REST/add',
 		data:{
 		'key':key,
 		'content':content},
@@ -63,7 +64,7 @@ $(document).ready(function(){
 	// Perform check query to DPASS
 	var check = $.ajax({
 		method:'POST',
-		url:'https://kaugebra.com/dpass-rest/check',
+		url:'https://vflits.com/DPASS-REST/check',
 		data:{'key':key},
 	});
 	check.done(function(data){
