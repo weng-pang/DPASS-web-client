@@ -1,3 +1,1 @@
-start "" /MIN "C:\Program Files\Mozilla Firefox\firefox.exe" index.html
-timeout /T 10
-taskkill /IM firefox.exe /F
+@start "" "c:\program files (x86)\google\chrome\application\chrome.exe" --new-window file:///C:/Users/weng/DPASS-web-client/index.html?id=%1
