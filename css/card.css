@@ -1,0 +1,32 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+    width:120px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    float:left;
+	font-family: 'Rubik', sans-serif;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+
+strong{
+	font-size:25px;
+	font-weight:900;
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.container {
+    padding: 2px 16px;
+    
+}
+
+.azure {
+background-color: azure;
+}

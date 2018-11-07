@@ -10,6 +10,9 @@ node_modules folder must accomply this file to run.
 
 -->
 <head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+<link rel="stylesheet" href="css/card.css" />
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script>
 // Javascript Querystring based on https://davidwalsh.name/query-string-javascript
@@ -26,7 +29,7 @@ $(document).ready(function(){
 	// DateTime Format Output is based on https://stackoverflow.com/questions/20083807/javascript-date-to-sql-date-object
 	// The toISOString method displays time in UTC, the mitigation is based on https://stackoverflow.com/a/37661393
 	var dateTime = new Date(localDate.getTime() - (localDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' ');
-	$("div#datetime").html(dateTime);
+	$("div#datetime").html("<p><strong>Time</strong></p><p>" + dateTime + "</p>");
 	var request = $.ajax({
 		method:'POST',
 		url:'https://vflits.com/DPASS-REST/check',
@@ -36,13 +39,21 @@ $(document).ready(function(){
 		console.log(data);
 		
 		$("div#completed").html(JSON.stringify(data));
+		
+		//var obj = JSON.parse(JSON.stringify(data));
+		var obj = data;
+		var outputText ="";
+		for (i=0; i<obj.length; i++){
+			outputText += "<div class=\"card\"><p><strong>" + obj[i].machineid +"</strong></p>"+ "<p>" + obj[i].update +"</p></div>";
+		}
+		$("div#completed").html(outputText);
 	});
 });
 </script>
 </head>
-<body>
+<body class="container">
 <div id="url"></div>
-<div id="datetime"></div>
-<div id="completed"></div>
+<div id="datetime" class="card"></div>
+<div id="completed" ></div>
 </body>
 </html>
